@@ -1,46 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Zaidan</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Zaidan Fahmi</title>
+  <style>
+    /* ------------------ GLOBAL STYLE ------------------ */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ------------------ HEADER / HERO ------------------ */
+    header {
+      height: 90vh;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1511227499331-25d9c73249a0?auto=format&fit=crop&w=1200&q=60');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    .btn-primary {
+      margin-top: 20px;
+      background: #ffb703;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: #fb8500;
+    }
+
+    /* ------------------ SECTION TITLES ------------------ */
+    section {
+      padding: 60px 10%;
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    section h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: #fb8500;
+      margin: 10px auto;
+      border-radius: 2px;
+    }
+
+    /* ------------------ ABOUT SECTION ------------------ */
+    .about-container {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .about-photo {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .about-photo img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .about-text {
+      flex: 2;
+      min-width: 280px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* ------------------ PROJECT SECTION ------------------ */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .project-card .content {
+      padding: 20px;
+    }
+
+    .project-card h3 {
+      margin: 0;
+      margin-bottom: 10px;
+    }
+
+    /* ------------------ CONTACT SECTION ------------------ */
+    .contact-box {
+      width: 100%;
+      max-width: 450px;
+      background: white;
+      margin: auto;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .contact-box p {
+      margin: 10px 0;
+      font-size: 1.1rem;
+    }
+
+    /* ------------------ FOOTER ------------------ */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #222;
+      color: white;
+      margin-top: 40px;
+    }
+      /* ------------------ ANIMATIONS ------------------ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1>Zaidan Fahmi</h1>
-        <p>Agribusiness Graduate | Sales & Marketing Enthusiast</p>
-    </header>
+  <!-- HERO / HEADER -->
+  <header class="fade-in">
+    <h1>Zaidan Fahmi</h1>
+    <p>Agribusiness Graduate • Sales Enthusiast • Data-driven Decision Maker</p>
+    <a href="#about" class="btn-primary">Explore Portfolio</a>
+  </header>
 
-    <section id="about">
-        <h2>About Me</h2>
+  <!-- ABOUT SECTION -->
+  <section id="about" class="fade-in">
+    <h2>About Me</h2>
+    <div class="about-container">
+      <div class="about-photo">
+        <img src="fp.jpg" alt="Profile Photo">
+      </div>
+      <div class="about-text">
         <p>
-            Saya adalah lulusan Agribisnis FEM IPB dengan pengalaman sebagai ketua himpunan,
-            dan memiliki ketertarikan dalam dunia sales & marketing. Saya senang bekerja 
-            dengan data dan berorientasi pada hasil.
+          Saya adalah lulusan Agribisnis FEM IPB dengan pengalaman sebagai ketua himpunan dan memiliki minat kuat dalam dunia sales, marketing, dan pengambilan keputusan berbasis data.
+          Saya suka menghadapi tantangan baru, bekerja dengan tim, serta berorientasi pada pencapaian hasil terbaik.
         </p>
-    </section>
+        <p>
+          Portofolio ini berisi rangkuman pengalaman, project, serta pencapaian saya selama kuliah, organisasi, dan dunia kerja.
+        </p>
+      </div>
+    </div>
+  </section>
 
-    <section id="portfolio">
-        <h2>My Projects</h2>
-        <div class="project">
-            <h3>Project 1</h3>
-            <p>Deskripsi singkat project atau pengalaman kerja Anda.</p>
+  <!-- PROJECT SECTION -->
+  <section id="projects" class="fade-in">
+    <h2>Projects & Experiences</h2>
+
+    <div class="project-grid">
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&w=600&q=60" alt="Project Image">
+        <div class="content">
+          <h3>Sales & Marketing Experience</h3>
+          <p>Mengembangkan strategi penawaran dan melakukan pendekatan pelanggan berdasarkan data dan kebutuhan pasar.</p>
         </div>
+      </div>
 
-        <div class="project">
-            <h3>Project 2</h3>
-            <p>Deskripsi singkat kegiatan, lomba, program kerja, atau laporan.</p>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1542224566-6e85a6d7a6c5?auto=format&fit=crop&w=600&q=60" alt="Project Image">
+        <div class="content">
+          <h3>Ketua Himpunan Agribisnis</h3>
+          <p>Memimpin lebih dari 100 anggota dan menyusun 20+ program kerja strategis untuk mahasiswa.</p>
         </div>
-    </section>
+      </div>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: zaidan@example.com</p>
-        <p>LinkedIn: linkedin.com/in/zaidan</p>
-    </section>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?auto=format&fit=crop&w=600&q=60" alt="Project Image">
+        <div class="content">
+          <h3>Magang Perkebunan Kelapa Sawit</h3>
+          <p>Mengawasi panen, distribusi TBS, dan monitoring produktivitas dengan pendekatan efisien.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script src="script.js"></script>
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="fade-in">
+    <h2>Contact Me</h2>
+    <div class="contact-box">
+      <p>Email: zaidan@example.com</p>
+      <p>LinkedIn: linkedin.com/in/zaidan</p>
+      <p>WhatsApp: 08xxxxxxxxxx</p>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Zaidan Fahmi — Portfolio Website
+  </footer>
+
 </body>
 </html>
