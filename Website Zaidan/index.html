@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portofolio Zaidan Fahmi Abdurrasyid</title>
+
+  <!-- Font + ScrollReveal -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/scrollreveal"></script>
+
+  <style>
+    /* ---------- RESET & GLOBAL ---------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    html,body { height: 100%; }
+    body {
+      background: linear-gradient(120deg,#7f00ff 0%, #e100ff 60%);
+      color: #fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-y: auto;
+    }
+    a { color: inherit; }
+
+    /* ---------- HEADER ---------- */
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 72px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 12px 40px;
+      background: rgba(0,0,0,0.28);
+      backdrop-filter: blur(8px);
+      z-index: 1200;
+    }
+    header h1 { font-size: 1.1rem; font-weight:600; letter-spacing:0.6px; }
+    nav { display:flex; gap:18px; align-items:center; }
+    nav a { color:#fff; text-decoration:none; font-weight:500; opacity:0.95; transition: color .18s, transform .18s; }
+    nav a:hover { color:#ffd6f9; transform: translateY(-2px); }
+
+    /* offset for fixed header when linking */
+    section { scroll-margin-top: 84px; }
+
+    /* ---------- SECTIONS BASE ---------- */
+    .section {
+      width:100%;
+      padding: 110px 28px 70px;
+      display:block;
+    }
+    .wrap { max-width:1100px; margin:0 auto; }
+
+    /* ---------- HOME ---------- */
+    #home { text-align:center; padding-top:120px; padding-bottom:120px; background-attachment: fixed; }
+    #home h2 { font-size:2.6rem; margin-bottom:10px; color: #fff; }
+    #home p { max-width:860px; margin: 0 auto 20px; font-size:1.05rem; color: #fff9; line-height:1.6; }
+    .btn { display:inline-block; background:#ff4081; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:600; transition:background .18s; }
+    .btn:hover { background:#ff79b0; }
+
+    /* ---------- ABOUT ---------- */
+    #about { background:#2a003f; padding-top:130px; padding-bottom:80px; }
+    .about-grid { display:flex; gap:28px; align-items:flex-start; flex-wrap:wrap; justify-content:center; }
+    .about-left { width:160px; height:160px; border-radius:50%; overflow:hidden; border:4px solid #ff4081; }
+    .about-left img { width:100%; height:100%; object-fit:cover; display:block; }
+    .about-right { max-width:760px; text-align:left; }
+    #about h2 { margin-bottom:12px; color:#fff; }
+    #about p { color:#fff9; line-height:1.8; }
+
+    /* ---------- SKILLS ---------- */
+    #skills { background:#45006e; padding-top:110px; padding-bottom:90px; }
+    .skill-list { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:18px; }
+    .skill { background: rgba(255,255,255,0.06); padding:12px 18px; border-radius:12px; font-weight:600; min-width:140px; text-align:center; transition:transform .18s, background .18s; }
+    .skill:hover { transform:translateY(-6px); background: rgba(255,255,255,0.12); }
+
+    /* ---------- PROJECTS (PROMINENT) ---------- */
+    #projects { background:#5a0088; padding-top:120px; padding-bottom:100px; }
+    .projects-title { text-align:center; margin-bottom:28px; }
+    .project-grid {
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      align-items:start;
+      margin-top:20px;
+    }
+
+    /* Project card */
+    .project-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+      position:relative;
+      overflow:visible;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    /* glow border */
+    .project-card::before {
+      content: "";
+      position:absolute; inset:-2px;
+      border-radius:20px;
+      background: linear-gradient(90deg, rgba(127,0,255,0.18), rgba(225,0,255,0.12));
+      filter: blur(8px);
+      z-index:-1;
+      opacity:0.9;
+    }
+    .project-card:hover { transform:translateY(-10px); box-shadow:0 14px 50px rgba(0,0,0,0.6); }
+
+    .project-head { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .project-head h3 { font-size:1.05rem; color:#ffd6f9; margin-bottom:8px; }
+    .project-body { margin-top:12px; color:#fff; line-height:1.75; text-align:justify; max-height: 220px; overflow:hidden; position:relative; }
+    .project-body.expanded { max-height: none; }
+
+    /* read-more button */
+    .read-more {
+      display:inline-block; margin-top:12px; background:transparent;border:1px solid rgba(255,255,255,0.12);
+      padding:8px 12px;border-radius:8px;color:#ffd6f9;font-weight:600;cursor:pointer;
+    }
+    .read-more:hover { background: rgba(255,255,255,0.03); }
+
+    /* slider inside card */
+    .card-slider { margin-top:14px; overflow:hidden; border-radius:12px; border: 1px solid rgba(255,255,255,0.04); }
+    .card-slides { display:flex; transition: transform 0.9s ease; width:100%; }
+    .card-slides img { width:100%; display:block; object-fit:cover; flex-shrink:0; }
+
+    .project-footer { display:flex; gap:12px; align-items:center; margin-top:12px; flex-wrap:wrap; }
+    .link-btn { background:#ff4081; color:#fff; padding:8px 14px; border-radius:8px; text-decoration:none; font-weight:700; display:inline-block; transition:background .18s; }
+    .link-btn:hover { background:#ff79b0; }
+
+    /* make description area show gradient when collapsed */
+    .project-body::after {
+      content: ""; position:absolute; left:0; right:0; bottom:0; height:36px;
+      background: linear-gradient(180deg, rgba(90,0,136,0), rgba(90,0,136,0.9));
+      display:block; transition:opacity .18s;
+    }
+    .project-body.expanded::after { opacity:0; pointer-events:none; }
+
+    /* if expanded, adjust spacing */
+    .project-card.expanded { padding-bottom: 22px; }
+
+    /* ---------- CONTACT ---------- */
+    #contact { background:#320055; padding-top:110px; padding-bottom:110px; }
+    .contact-grid { display:flex; gap:28px; align-items:flex-start; flex-wrap:wrap; justify-content:center; }
+    form { width:100%; max-width:440px; display:flex; flex-direction:column; gap:12px; }
+    input, textarea { padding:10px 12px; border-radius:8px; border:none; outline:none; font-size:0.98rem; }
+    .social-links { display:flex; gap:14px; align-items:center; margin-top:10px; }
+    .social-links a { padding:8px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.03); color:#fff; text-decoration:none; min-width:44px; text-align:center; }
+
+    /* ---------- FOOTER ---------- */
+    footer { text-align:center; padding:18px 10px; background: rgba(0,0,0,0.18); color:#fff8; position:relative; z-index:10; }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 980px) {
+      .project-grid { grid-template-columns: 1fr; }
+      header { padding: 12px 20px; }
+      .wrap { padding: 0 18px; }
+      #home h2 { font-size:2.2rem; }
+    }
+    @media (max-width:480px) {
+      header { height:64px; }
+      #home h2 { font-size:1.6rem; }
+      .btn { padding:8px 12px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Zaidan Fahmi Abdurrasyid</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HOME -->
+  <section id="home" class="section">
+    <div class="wrap">
+      <h2>Hi, Nama Saya Zaidan Fahmi Abdurrasyid</h2>
+      <p>Sarjana Ekonomi lulusan dari Agribisnis IPB dengan semangat tinggi di bidang analisis kelayakan bisnis, manajemen risiko, dan strategi pengembangan bisnis.</p>
+      <div style="margin-top:18px;">
+        <a class="btn" href="cv-zaidan.pdf" download>📄 Download CV</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="wrap about-grid">
+      <div class="about-left"><img src="fp.jpg" alt="Foto Profil"></div>
+      <div class="about-right">
+        <h2>Tentang Saya</h2>
+        <p>Saya adalah orang yang senang belajar hal baru, menganalisa sesuatu dengan berbasiskan pada data. 
+           Dengan pengalaman sebagai Ketua Himpunan Agribisnis FEM IPB dan magang di industri agribisnis, saya siap berkembang di dunia profesional.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section">
+    <div class="wrap">
+      <h2 style="text-align:center">Kemampuan</h2>
+      <div class="skill-list" style="margin-top:18px;">
+        <div class="skill">Risk Management</div>
+        <div class="skill">Marketing Strategy</div>
+        <div class="skill">Data Analysis</div>
+        <div class="skill">Leadership</div>
+        <div class="skill">Python, Tableau, etc</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <div class="wrap">
+      <div class="projects-title">
+        <h2>Proyek Saya</h2>
+        <p style="color:#fff9; margin-top:8px; max-width:760px; margin-left:auto; margin-right:auto;">
+          Pengalaman Organisasi, Pengabdian Masyarakat, Magang, dan Penelitian
+        </p>
+      </div>
+
+      <div class="project-grid">
+
+        <!-- PROJECT 1 -->
+        <article class="project-card" id="proj-1">
+          <div class="project-head">
+            <h3>1️⃣ Ketua Himpunan Mahasiswa Agribisnis 2023</h3>
+          </div>
+
+          <div class="project-body" data-collapsed>
+            <p>
+              Sebagai Ketua HIPMA 2023, saya memimpin proses revitalisasi organisasi yang sempat kehilangan minat anggota pasca-pandemi. Dengan visi Arsa Abyakta (“tempat belajar dan berkembang yang menyenangkan”), kami membangun kembali semangat kolaborasi, inovasi, dan profesionalitas di kalangan mahasiswa Agribisnis IPB. HIPMA terdiri dari 480 anggota dengan 60 pengurus. Kami berhasil menyelenggarakan 30 program kerja dengan 14 program baru, salah satu yang terbaik adalah Indonesia Agribusiness Fair. Kami mendapatkan 2 penghargaan dari IPB Awards sebagai Himpunan terfavorit nomor 1 di IPB dan Himpunan nomor 2 terinovatif di IPB pada tahun 2023.
+            </p>
+          </div>
+
+          <div class="card-slider">
+            <div class="card-slides" id="slides-1">
+              <img src="H1.jpeg" alt="Dokumentasi 1">
+              <img src="H2.png" alt="Dokumentasi 2">
+              <img src="H3.png" alt="Dokumentasi 3">
+              <img src="H4.png" alt="Dokumentasi 4">
+              <img src="H5.png" alt="Dokumentasi 5">
+            </div>
+          </div>
+
+          <div class="project-footer">
+            <button class="read-more" data-target="proj-1">Selengkapnya</button>
+            <a class="link-btn" href="https://korpusipb.com/advertorial/paspi-gandeng-hipma-ipb-dalam-bedah-dan-diseminasi-buku-mitos-vs-fakta-industri-minyak-sawit-indonesia-dalam-isu-sosial-ekonomi-dan-lingkungan-global/" target="_blank" rel="noopener">🔗 Lihat Publikasi</a>
+          </div>
+        </article>
+
+        <!-- PROJECT 2 -->
+        <article class="project-card" id="proj-2">
+          <div class="project-head">
+            <h3>2️⃣ Proyek Pengembangan Ekonomi Desa di Kabupaten Blora</h3>
+          </div>
+
+          <div class="project-body" data-collapsed>
+            <p>
+              Melakukan pendampingan kepada masyarakat desa dalam membangun sistem pemasaran hasil pertanian yang lebih efisien. Proyek ini berfokus pada pemberdayaan UMKM lokal dan peningkatan literasi bisnis petani muda. Kami berhasil menciptakan 30 bisnis baru yang mengintegrasikan antara pertanian dengan peternakan.
+            </p>
+          </div>
+
+          <div class="card-slider">
+            <div class="card-slides" id="slides-2">
+              <img src="D1.jpeg" alt="Dokumentasi 1">
+              <img src="D2.jpeg" alt="Dokumentasi 2">
+              <img src="D3.png" alt="Dokumentasi 3">
+              <img src="D4.png" alt="Dokumentasi 4">
+              <img src="D5.png" alt="Dokumentasi 5">
+            </div>
+          </div>
+
+          <div class="project-footer">
+            <button class="read-more" data-target="proj-2">Selengkapnya</button>
+            <a class="link-btn" href="https://editor.id/kkn-tematik-di-blora-inovasi-dan-kreativitas-ipb-dipamerkan/" target="_blank" rel="noopener">🔗 Lihat Publikasi</a>
+          </div>
+        </article>
+
+        <!-- PROJECT 3 -->
+        <article class="project-card" id="proj-3">
+          <div class="project-head">
+            <h3>3️⃣ Proyek Magang Perkebunan Agribisnis</h3>
+          </div>
+
+          <div class="project-body" data-collapsed>
+            <p>
+              Saya melakukan magang di perusahaan perkebunan kelapa sawit, terlibat dalam proses pengumpulan data produksi, analisis efisiensi tenaga kerja, serta penerapan sistem agribisnis berkelanjutan di lapangan.
+            </p>
+          </div>
+
+          <div class="card-slider">
+            <div class="card-slides" id="slides-3">
+              <img src="S1.jpeg" alt="Dokumentasi 1">
+              <img src="S2.jpeg" alt="Dokumentasi 2">
+              <img src="S3.jpeg" alt="Dokumentasi 3">
+              <img src="S4.jpeg" alt="Dokumentasi 4">
+              <img src="S5.jpeg" alt="Dokumentasi 5">
+            </div>
+          </div>
+
+          <div class="project-footer">
+            <button class="read-more" data-target="proj-3">Selengkapnya</button>
+            <a class="link-btn" href="#" target="_blank" rel="noopener">🔗 Lihat Publikasi</a>
+          </div>
+        </article>
+
+        <!-- PROJECT 4 -->
+        <article class="project-card" id="proj-4">
+          <div class="project-head">
+            <h3>4️⃣ Penelitian: Pengaruh Kemitraan pada Peternak Sapi Perah</h3>
+          </div>
+
+          <div class="project-body" data-collapsed>
+            <p>
+              Penelitian ini menganalisis pengaruh kemitraan antara perusahaan PT Cisarua Mountain Dairy dan peternak terhadap produksi serta pendapatan peternak. Hasilnya diterbitkan dalam jurnal ilmiah sebagai kontribusi nyata bagi pengembangan agribisnis nasional.
+            </p>
+          </div>
+
+          <div class="card-slider">
+            <div class="card-slides" id="slides-4">
+              <img src="P1.png" alt="Dokumentasi 1">
+              <img src="P2.png" alt="Dokumentasi 2">
+            </div>
+          </div>
+
+          <div class="project-footer">
+            <button class="read-more" data-target="proj-4">Selengkapnya</button>
+            <a class="link-btn" href="https://repository.ipb.ac.id/jspui/bitstream/123456789/158467/1/cover_H3401201097_a048b4883817464b97e29c69191ee02c.pdf" target="_blank" rel="noopener">🔗 Lihat Publikasi</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="wrap contact-grid">
+      <div style="max-width:520px;">
+        <h2>Hubungi Saya</h2>
+        <p style="color:#fff9; margin-top:6px; max-width:760px;">
+          Isi form di bawah atau hubungi melalui email / media sosial — saya akan membalas secepatnya.
+        </p>
+        <div style="margin-top:12px;">
+          <form>
+            <input type="text" placeholder="Nama Anda" required>
+            <input type="email" placeholder="Email Anda" required>
+            <textarea rows="4" placeholder="Pesan..." required></textarea>
+            <button type="submit" style="margin-top:6px;" class="btn">Kirim</button>
+          </form>
+        </div>
+      </div>
+
+      <div style="min-width:220px;">
+        <h3 style="margin-bottom:8px;">Sosial</h3>
+        <div class="social-links">
+          <a href="https://linkedin.com/in/zaidanfahmiabdurrasyid" target="_blank" rel="noopener">💼</a>
+          <a href="https://instagram.com/zaidanfahmi" target="_blank" rel="noopener">📸</a>
+          <a href="mailto:zaidanfahmi57@gmail.com" rel="noopener">✉️</a>
+          <a href="https://github.com/ZaidanFahmi08" target="_blank" rel="noopener">💻</a>
+          <a href="cv-zaidan.pdf" download style="background:#ff4081; color:#fff;">📄</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 Zaidan Fahmi | All Rights Reserved
+  </footer>
+
+  <!-- ---------- SCRIPTS: SLIDER, READ-MORE, SCROLLREVEAL ---------- -->
+  <script>
+    // ---------- AUTO SLIDERS ----------
+    const sliderConfigs = [
+      { id: 'slides-1', interval: 3000 },
+      { id: 'slides-2', interval: 3000 },
+      { id: 'slides-3', interval: 3000 },
+      { id: 'slides-4', interval: 3000 }
+    ];
+
+    sliderConfigs.forEach(cfg => {
+      const el = document.getElementById(cfg.id);
+      if (!el) return;
+      const imgs = el.querySelectorAll('img');
+      let current = 0;
+
+      // ensure container width equals number of images (works responsively)
+      const update = () => {
+        // width handled by CSS; just shift transform
+        el.style.transform = `translateX(-${current * 100}%)`;
+      };
+
+      // clone images if only one to avoid blank space (keeps behavior consistent)
+      if (imgs.length === 1) {
+        const clone = imgs[0].cloneNode(true);
+        el.appendChild(clone);
+      }
+
+      setInterval(() => {
+        current = (current + 1) % el.querySelectorAll('img').length;
+        update();
+      }, cfg.interval);
+    });
+
+    // ---------- READ MORE / COLLAPSE ----------
+    document.querySelectorAll('.read-more').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const card = document.getElementById(targetId);
+        if (!card) return;
+        const body = card.querySelector('.project-body');
+        const isExpanded = body.classList.contains('expanded');
+
+        if (isExpanded) {
+          body.classList.remove('expanded');
+          card.classList.remove('expanded');
+          btn.textContent = 'Selengkapnya';
+          // scroll card into view so UI feels natural
+          card.scrollIntoView({ behavior:'smooth', block:'center' });
+        } else {
+          body.classList.add('expanded');
+          card.classList.add('expanded');
+          btn.textContent = 'Tutup';
+          // bring expanded content into view
+          card.scrollIntoView({ behavior:'smooth', block:'start' });
+        }
+      });
+    });
+
+    // ---------- ScrollReveal animations ----------
+    if (window.ScrollReveal) {
+      ScrollReveal().reveal('#home h2, #home p, #about img, #about h2, #about p, .skill, .project-card, .card-slider, form', {
+        distance: '40px',
+        duration: 800,
+        easing: 'ease-out',
+        origin: 'bottom',
+        interval: 80,
+        cleanup: true
+      });
+    }
+  </script>
+</body>
+</html>
